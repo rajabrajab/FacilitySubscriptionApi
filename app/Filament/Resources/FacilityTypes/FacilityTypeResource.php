@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\Users;
+namespace App\Filament\Resources\FacilityTypes;
 
-use App\Filament\Resources\Users\Pages\ListUsers;
-use App\Filament\Resources\Users\Pages\ViewUser;
-use App\Filament\Resources\Users\Schemas\UserForm;
-use App\Filament\Resources\Users\Schemas\UserInfolist;
-use App\Filament\Resources\Users\Tables\UsersTable;
-use App\Models\User;
+use App\Filament\Resources\FacilityTypes\Pages\ListFacilityTypes;
+use App\Filament\Resources\FacilityTypes\Schemas\FacilityTypeForm;
+use App\Filament\Resources\FacilityTypes\Schemas\FacilityTypeInfolist;
+use App\Filament\Resources\FacilityTypes\Tables\FacilityTypesTable;
+use App\Models\FacilityType;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -16,55 +15,57 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class UserResource extends Resource
+class FacilityTypeResource extends Resource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = FacilityType::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::UserGroup;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::Tag;
 
     public static function getNavigationLabel(): string
     {
-        return __('panel.users');
+        return __('panel.facilityTypes');
     }
 
     public static function getNavigationGroup(): ?string
     {
-        return __('panel.users');
+        return __('panel.facilityManagement');
     }
 
     public static function getNavigationSort(): ?int
     {
-        return 1;
+        return 2;
     }
 
     public static function getTitle(): string
     {
-        return __('panel.users');
+        return __('panel.facilityTypes');
     }
+
     public static function getModelLabel(): string
     {
-        return __('panel.user');
+        return __('panel.facilityType');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('panel.users');
+        return __('panel.facilityTypes');
     }
 
+    protected static ?string $recordTitleAttribute = 'no';
 
     public static function form(Schema $schema): Schema
     {
-        return UserForm::configure($schema);
+        return FacilityTypeForm::configure($schema);
     }
 
     public static function infolist(Schema $schema): Schema
     {
-        return UserInfolist::configure($schema);
+        return FacilityTypeInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return UsersTable::configure($table);
+        return FacilityTypesTable::configure($table);
     }
 
     public static function getRelations(): array
@@ -77,8 +78,7 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListUsers::route('/'),
-            'view' => ViewUser::route('/{record}'),
+            'index' => ListFacilityTypes::route('/'),
         ];
     }
 
@@ -89,11 +89,4 @@ class UserResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->where('type', 'user');
-    }
-
 }

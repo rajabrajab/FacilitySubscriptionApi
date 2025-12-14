@@ -62,4 +62,18 @@ class User extends Authenticatable implements FilamentUser,HasAvatar
             'fcm' => $token
         ]);
     }
+
+    public function facility(){
+        return $this->belongsTo(Facility::class);
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function getNoSubscriptionsAttribute()
+    {
+        return $this->subscriptions->count() === 0;
+    }
 }

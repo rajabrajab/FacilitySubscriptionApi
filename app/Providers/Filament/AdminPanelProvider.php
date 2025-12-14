@@ -33,17 +33,12 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->maxContentWidth(1280)
             ->colors([
-                // Brand / primary (used for active tab, main actions)
-                'primary'   => Color::Blue[900],   // warm yellow, not too strong
-                'secondary' => Color::Amber[400],    // slightly deeper yellow/amber
-
-                // Semantic colors
-                'success'   => Color::Lime[500],     // positive, fresh
-                'warning'   => Color::Amber[300],    // light, warm warning
-                'danger'    => Color::Rose[300],     // light red (not orange)
-                'info'      => Color::Yellow[500],   // more intense yellow for info highlights
-
-                // Neutrals
+                'primary'   => Color::Blue[900],
+                'secondary' => Color::Amber[400],
+                'success'   => Color::Lime[500],
+                'warning'   => Color::Amber[300],
+                'danger'    => Color::Rose[300],
+                'info'      => Color::Yellow[500],
                 'gray'  => Color::Zinc[600],
                 'dark'  => Color::Zinc[800],
                 'light' => Color::Zinc[50],
